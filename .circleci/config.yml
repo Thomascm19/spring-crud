@@ -14,8 +14,8 @@ jobs: # a collection of steps
 
       - image: circleci/mysql:5.7
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_ROOT_PASSWORD: ""
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
 
     steps: # a collection of executable commands
 
@@ -24,6 +24,8 @@ jobs: # a collection of steps
       - run:
           name: "Wait for MySQL"
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
+
+      - run: sudo apt-get install mysql-client
 
       - run: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE person"
 
