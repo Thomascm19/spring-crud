@@ -20,7 +20,7 @@ jobs: # a collection of steps
 
       - run:
           name: Install dependencies
-          command: sudo chmod +x ./gradlew build -x test
+          command: sudo chmod ./gradlew build -x test
 
       - save_cache: # saves the project dependencies
           paths:
