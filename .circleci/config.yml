@@ -7,12 +7,15 @@ jobs: # a collection of steps
     docker: # run the steps with Docker
       - image: cimg/openjdk:18.0.2 # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
-          APP_VERSION: 1.0.0
-          APP_DESCRIPTION: "Person API"
-          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/person
-          SPRING_DATASOURCE_USERNAME: thomas
-          SPRING_DATASOURCE_PASSWORD: thomas
-          SPRING_JPA_HIBERNATE_DDL_AUTO: update
+          DB_ROOT_USER: root
+          DB_URL: jdbc:mysql://localhost:3306/person
+          DB_DRIVER: com.mysql.cj.jdbc.Driver
+          DB_PASS: ""
+
+      - image: circleci/mysql:8.0.26
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: ""
 
     steps: # a collection of executable commands
 
